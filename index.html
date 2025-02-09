@@ -3,70 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
   <title>Fiche de Rencontre Client – Coaching & Fitness</title>
   <style>
+    /* Styles de base */
+    
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200; /* ou 100 pour encore plus fin */
       margin: 0;
       padding: 20px;
-      background-color: #f7f7f7;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+      min-height: 100vh;
     }
+    
     .container {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
-      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      max-width: 1000px;
+      margin: 20px auto;
+      width: 90%; /* Ajout pour la responsivité */
     }
+    
     h1 {
+      color: #1a202c;
       text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.2em;
+      font-weight: 700;
+      border-bottom: 3px solid #4c3bff;
+      padding-bottom: 10px;
+    }
+    
+    /* Style des sections */
+    section {
+      background: #deefff;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid #318aff;
+    }
+    
+    /* Style des labels */
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #2d3748;
+      font-weight: 500;
+    }
+    
+    /* Style des champs de saisie */
+    input[type="text"], 
+    input[type="number"], 
+    textarea {
+      width: calc(100% - 40px); /* Ajustement pour garder une marge de chaque côté */
+      padding: 12px;
+      margin: 8px 20px 20px; /* Marge de 20px à gauche et à droite */
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-sizing: border-box; /* Pour inclure padding et border dans la largeur */
+    }
+    
+    input[type="text"]:focus, 
+    input[type="number"]:focus, 
+    textarea:focus {
+      border-color: #4338ca;
+      box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+      outline: none;
+    }
+    
+    /* Style des checkboxes et radios */
+    .checkbox-group {
+      margin: 15px 20px; /* Ajout de marges latérales */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      min-width: 150px; /* Largeur minimum pour éviter des éléments trop serrés */
+    }
+    
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    /* Style des boutons */
+    .button {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px 5px;
+    }
+    
+    .button {
+      background-color: #4338ca;
+      color: white;
+    }
+    
+    .button:hover {
+      background-color: #3730a3;
+      transform: translateY(-1px);
+    }
+    
+    .button-copy {
+      background-color: #2563eb;
+    }
+    
+    .button-copy:hover {
+      background-color: #1d4ed8;
+    }
+    
+    .button-download {
+      background-color: #dc2626;
+    }
+    
+    .button-download:hover {
+      background-color: #b91c1c;
+    }
+    
+    /* Style de la section de sortie */
+    .output-section {
+      margin-top: 40px;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .output-section h2 {
+      color: #1a202c;
       margin-bottom: 20px;
     }
-    label {
-      font-weight: bold;
-    }
-    input[type="text"], input[type="number"], textarea {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .checkbox-group {
-      margin-bottom: 15px;
-    }
-    .checkbox-group label {
-      margin-right: 15px;
-    }
-    .output-section {
-      margin-top: 30px;
-    }
+    
     .output-section pre {
-      background-color: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      font-family: monospace;
       white-space: pre-wrap;
       word-wrap: break-word;
     }
-    .button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    
+    /* Media Queries pour la responsivité */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+    
+      .container {
+        padding: 20px;
+        width: 95%;
+      }
+    
+      h1 {
+        font-size: 1.8em;
+      }
+    
+      section {
+        padding: 15px;
+      }
+    
+      input[type="text"], 
+      input[type="number"], 
+      textarea {
+        width: calc(100% - 20px);
+        margin: 8px 10px 20px;
+      }
+    
+      .checkbox-group {
+        margin: 15px 10px;
+      }
+    
+      .checkbox-group label {
+        min-width: 120px;
+      }
+    
+      .button {
+        width: 100%;
+        margin: 10px 0;
+      }
     }
-    .button-download {
-      background-color: #FF5722;
-      margin-top: 10px;
+    
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
+      }
+    
+      .checkbox-group label {
+        min-width: 100%;
+      }
+    
+      input[type="text"], 
+      input[type="number"], 
+      textarea {
+        font-size: 14px;
+      }
     }
-    .button-copy {
-      background-color: #2196F3;
-      margin-top: 10px;
-    }
-  </style>
-</head>
+    </style>
+  </head>
 <body>
 
   <div class="container">
@@ -177,12 +324,14 @@
         <label><input type="radio" name="contact" value="Téléphone"> Téléphone</label>
         <label><input type="radio" name="contact" value="WhatsApp"> WhatsApp</label>
         <label><input type="radio" name="contact" value="En salle"> En salle directement</label>
+        <label>autres</label>
+        <input type="text" id="autre moyen de contact" name="autremoyendecontact" placeholder="me contacter par...'">
       </section>
 
       <!-- Section 7: Un dernier mot ? -->
       <section>
-        <label>Un dernier mot ?</label>
-        <textarea id="dernierMot" name="dernierMot" placeholder="Avez-vous une question, une attente particulière ou un élément à partager ?"></textarea>
+        <label>Avez-vous une question, une attente particulière ou un élément à partager ?</label>
+        <textarea id="dernierMot" name="dernierMot" placeholder="">votre partage</textarea>
       </section>
     </form>
 
@@ -200,15 +349,19 @@
     <button type="button" class="button button-download" onclick="downloadMarkdown()">Télécharger le fichier Markdown</button>
   </div>
 
-  <script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formClient");
     const markdownOutput = document.getElementById("markdownOutput");
 
     // Fonction utilitaire pour récupérer les valeurs des checkbox sélectionnées
-    function getCheckedValues(formData, name) {
+    function getCheckedValues(formData, name, autreField) {
       const values = [];
       document.querySelectorAll(`input[name="${name}"]:checked`).forEach(input => values.push(input.value));
+      const autreValue = formData.get(autreField);
+      if (autreValue) {
+        values.push(`Autre: ${autreValue}`);
+      }
       return values.length > 0 ? values.join(", ") : "Aucune sélection";
     }
 
@@ -229,12 +382,12 @@
       markdown += `\n### 2. Expérience sportive\n`;
       markdown += `- **Avez-vous déjà suivi un programme d'entraînement ?** ${formData.get('experienceCoaching') || "Non renseigné"}\n`;
       markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport') || "Non renseigné"}\n`;
-      markdown += `- **Types d'activités physiques**: ${getCheckedValues(formData, 'typeActivites')}\n`;
+      markdown += `- **Types d'activités physiques**: ${getCheckedValues(formData, 'typeActivites', 'typeActivitesAutre')}\n`;
 
       // Section 3: Objectifs & motivations
       markdown += `\n### 3. Objectifs & motivations\n`;
-      markdown += `- **Pourquoi s'entraîner ?** ${getCheckedValues(formData, 'objectifs')}\n`;
-      markdown += `- **Motivations principales**: ${getCheckedValues(formData, 'motivations')}\n`;
+      markdown += `- **Pourquoi s'entraîner ?** ${getCheckedValues(formData, 'objectifs', 'objectifsAutre')}\n`;
+      markdown += `- **Motivations principales**: ${getCheckedValues(formData, 'motivations', 'motivationsAutre')}\n`;
 
       // Section 4: Niveau d'énergie & contraintes
       markdown += `\n### 4. Niveau d'énergie & contraintes\n`;
@@ -244,14 +397,17 @@
       // Section 5: Alimentation
       markdown += `\n### 5. Alimentation\n`;
       markdown += `- **Type d'alimentation**: ${formData.get('alimentation') || "Non renseigné"}\n`;
-      markdown += `- **Objectifs alimentaires**: ${getCheckedValues(formData, 'objectifsAlimentation')}\n`;
-      markdown += `- **Régime spécifique**: ${getCheckedValues(formData, 'regime')}\n`;
+      markdown += `- **Objectifs alimentaires**: ${getCheckedValues(formData, 'objectifsAlimentation', 'objectifsAlimentationAutre')}\n`;
+      markdown += `- **Régime spécifique**: ${getCheckedValues(formData, 'regime', 'regimeAutre')}\n`;
 
-      // Section 6: Engagement
-      markdown += `\n### 6. Engagement & suivi\n`;
+       markdown += `\n### 6. Engagement & suivi\n`;
       markdown += `- **Accompagnement personnalisé ?** ${formData.get('accompagnement') || "Non renseigné"}\n`;
-      markdown += `- **Mode de contact préféré**: ${formData.get('contact') || "Non renseigné"}\n`;
-
+      let contact = formData.get('contact') || "Non renseigné";
+      const autreContact = formData.get('autremoyendecontact');
+      if (autreContact) {
+        contact += `, Autre moyen de contact: ${autreContact}`;
+      }
+      markdown += `- **Mode de contact préféré**: ${contact}\n`;
       // Section 7: Dernier mot
       markdown += `\n### 7. Un dernier mot ?\n`;
       markdown += `${formData.get('dernierMot') || "Non renseigné"}\n`;
@@ -282,6 +438,10 @@
     form.addEventListener("change", updateMarkdown);
   });
 </script>
+</html>
+
+
+
 
 
 
