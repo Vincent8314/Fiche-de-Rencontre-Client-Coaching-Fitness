@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche de Rencontre Client – Coaching & Fitness</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .checkbox-group {
+      margin-bottom: 15px;
+    }
+    .checkbox-group label {
+      margin-right: 15px;
+    }
+    .output-section {
+      margin-top: 30px;
+    }
+    .output-section pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button-download {
+      background-color: #FF5722;
+      margin-top: 10px;
+    }
+    .button-copy {
+      background-color: #2196F3;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Fiche de Rencontre Client – Coaching & Fitness</h1>
+
+    <form id="formClient">
+
+      <!-- Section 1: Informations personnelles -->
+      <section>
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom">
+        
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom">
+
+        <label for="age">Âge:</label>
+        <input type="number" id="age" name="age">
+
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" name="profession">
+
+        <label for="coordonnees">Coordonnées (email/téléphone):</label>
+        <input type="text" id="coordonnees" name="coordonnees">
+      </section>
+
+      <!-- Section 2: Expérience sportive -->
+      <section>
+        <label>Avez-vous déjà suivi un programme d'entraînement ou un coaching ?</label>
+        <label><input type="radio" name="experienceCoaching" value="oui"> Oui</label>
+        <label><input type="radio" name="experienceCoaching" value="non"> Non</label>
+
+        <label for="frequenceSport">Fréquence de sport actuelle:</label>
+        <label><input type="radio" name="frequenceSport" value="Jamais"> Jamais</label>
+        <label><input type="radio" name="frequenceSport" value="1-2x/semaine"> 1-2x/semaine</label>
+        <label><input type="radio" name="frequenceSport" value="3-4x/semaine"> 3-4x/semaine</label>
+        <label><input type="radio" name="frequenceSport" value="5x et +"> 5x et +</label>
+
+        <div class="checkbox-group">
+          <label>Types d'activités physiques:</label>
+          <label><input type="checkbox" name="typeActivites" value="Musculation"> Musculation</label>
+          <label><input type="checkbox" name="typeActivites" value="Cardio"> Cardio (course, vélo…)</label>
+          <label><input type="checkbox" name="typeActivites" value="Yoga"> Yoga/Pilates</label>
+          <label><input type="checkbox" name="typeActivites" value="Sport collectif"> Sport collectif</label>
+          <label><input type="checkbox" name="typeActivites" value="Autre"> Autre</label>
+          <input type="text" id="typeActivitesAutre" name="typeActivitesAutre" placeholder="Précisez si 'Autre'">
+        </div>
+      </section>
+
+      <!-- Section 3: Objectifs & motivations -->
+      <section>
+        <label>Pourquoi souhaitez-vous vous entraîner ?</label>
+        <label><input type="checkbox" name="objectifs" value="Perte de poids"> Perte de poids</label>
+        <label><input type="checkbox" name="objectifs" value="Prise de muscle"> Prise de muscle</label>
+        <label><input type="checkbox" name="objectifs" value="Performance sportive"> Performance sportive</label>
+        <label><input type="checkbox" name="objectifs" value="Bien-être général"> Bien-être général</label>
+        <label><input type="checkbox" name="objectifs" value="Énergie & vitalité"> Énergie & vitalité</label>
+        <input type="text" id="objectifsAutre" name="objectifsAutre" placeholder="Précisez si 'Autre'">
+
+        <label>Qu'est-ce qui vous motive le plus à atteindre vos objectifs ?</label>
+        <label><input type="checkbox" name="motivations" value="Esthétique"> Esthétique</label>
+        <label><input type="checkbox" name="motivations" value="Santé"> Santé</label>
+        <label><input type="checkbox" name="motivations" value="Confiance en soi"> Confiance en soi</label>
+        <label><input type="checkbox" name="motivations" value="Défi personnel"> Défi personnel</label>
+        <input type="text" id="motivationsAutre" name="motivationsAutre" placeholder="Précisez si 'Autre'">
+      </section>
+
+      <!-- Section 4: Niveau d’énergie & contraintes -->
+      <section>
+        <label>Comment évaluez-vous votre niveau d’énergie au quotidien ?</label>
+        <label><input type="radio" name="energie" value="Faible"> Faible</label>
+        <label><input type="radio" name="energie" value="Moyen"> Moyen</label>
+        <label><input type="radio" name="energie" value="Élevé"> Élevé</label>
+
+        <label>Avez-vous des contraintes particulières (blessures, emploi du temps chargé, autres) ?</label>
+        <textarea id="contraintes" name="contraintes"></textarea>
+      </section>
+
+      <!-- Section 5: Alimentation & habitudes nutritionnelles -->
+      <section>
+        <label>Comment décririez-vous votre alimentation ?</label>
+        <label><input type="radio" name="alimentation" value="Équilibrée"> Équilibrée et variée</label>
+        <label><input type="radio" name="alimentation" value="Plutôt saine"> Plutôt saine, mais avec quelques écarts</label>
+        <label><input type="radio" name="alimentation" value="Irrégulière"> Irrégulière ou déséquilibrée</label>
+
+        <label>Avez-vous des objectifs liés à l’alimentation ?</label>
+        <label><input type="checkbox" name="objectifsAlimentation" value="Perte de poids"> Perte de poids</label>
+        <label><input type="checkbox" name="objectifsAlimentation" value="Prise de masse"> Prise de masse</label>
+        <label><input type="checkbox" name="objectifsAlimentation" value="Plus d'énergie"> Plus d’énergie au quotidien</label>
+        <label><input type="checkbox" name="objectifsAlimentation" value="Améliorer mes habitudes"> Améliorer mes habitudes alimentaires</label>
+        <input type="text" id="objectifsAlimentationAutre" name="objectifsAlimentationAutre" placeholder="Précisez si 'Autre'">
+
+        <label>Suivez-vous un régime spécifique ?</label>
+        <label><input type="checkbox" name="regime" value="Végétarien"> Végétarien</label>
+        <label><input type="checkbox" name="regime" value="Végétalien"> Végétalien</label>
+        <label><input type="checkbox" name="regime" value="Cétogène"> Cétogène</label>
+        <input type="text" id="regimeAutre" name="regimeAutre" placeholder="Précisez si 'Autre'">
+      </section>
+
+      <!-- Section 6: Engagement & suivi -->
+      <section>
+        <label>Êtes-vous intéressé(e) par un accompagnement personnalisé ?</label>
+        <label><input type="radio" name="accompagnement" value="Oui"> Oui, je veux en savoir plus</label>
+        <label><input type="radio" name="accompagnement" value="Peut-être"> Peut-être</label>
+        <label><input type="radio" name="accompagnement" value="Pas pour l'instant"> Pas pour l’instant</label>
+
+        <label>Préférez-vous être contacté(e) par :</label>
+        <label><input type="radio" name="contact" value="Email"> Email</label>
+        <label><input type="radio" name="contact" value="Téléphone"> Téléphone</label>
+        <label><input type="radio" name="contact" value="WhatsApp"> WhatsApp</label>
+        <label><input type="radio" name="contact" value="En salle"> En salle directement</label>
+      </section>
+
+      <!-- Section 7: Un dernier mot ? -->
+      <section>
+        <label>Un dernier mot ?</label>
+        <textarea id="dernierMot" name="dernierMot" placeholder="Avez-vous une question, une attente particulière ou un élément à partager ?"></textarea>
+      </section>
+
+      <!-- Button to generate markdown -->
+      <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
+    </form>
+
+    <div class="output-section">
+      <h2>Markdown généré</h2>
+      <pre id="markdownOutput"></pre>
+    </div>
+
+    <!-- Button to copy markdown to clipboard -->
+    <button type="button" class="button button-copy" onclick="copyToClipboard()">Copier le Markdown</button>
+
+    <!-- Button to download markdown as .md file -->
+    <button type="button" class="button button-download" onclick="downloadMarkdown()">Télécharger le fichier Markdown</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("formClient");
+      const markdownOutput = document.getElementById("markdownOutput");
+
+      // Met à jour le Markdown à chaque saisie
+      form.addEventListener("input", updateMarkdown);
+      form.addEventListener("change", updateMarkdown);
+
+      function updateMarkdown() {
+        const formData = new FormData(form);
+        let markdown = '';
+
+        // Section 1: Informations personnelles
+        markdown += `### 1. Informations personnelles\n`;
+       
+
+ markdown += `- **Nom**: ${formData.get('nom')}\n`;
+        markdown += `- **Prénom**: ${formData.get('prenom')}\n`;
+        markdown += `- **Âge**: ${formData.get('age')}\n`;
+        markdown += `- **Profession**: ${formData.get('profession')}\n`;
+        markdown += `- **Coordonnées (email/téléphone)**: ${formData.get('coordonnees')}\n`;
+
+        // Section 2: Expérience sportive
+        markdown += `\n### 2. Expérience & habitudes sportives\n`;
+        markdown += `- **Avez-vous déjà suivi un programme d’entraînement ou un coaching ?** ${formData.get('experienceCoaching') === 'oui' ? 'Oui' : 'Non'}\n`;
+        markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport')}\n`;
+        markdown += `- **Types d'activités physiques**: ${getCheckboxValues(formData.getAll('typeActivites'))}\n`;
+
+        // Section 3: Objectifs & motivations
+        markdown += `\n### 3. Objectifs & motivations\n`;
+        markdown += `- **Pourquoi souhaitez-vous vous entraîner ?** ${getCheckboxValues(formData.getAll('objectifs'))}\n`;
+        markdown += `- **Qu’est-ce qui vous motive le plus à atteindre vos objectifs ?** ${getCheckboxValues(formData.getAll('motivations'))}\n`;
+
+        // Section 4: Niveau d’énergie & contraintes
+        markdown += `\n### 4. Niveau d’énergie & contraintes\n`;
+        markdown += `- **Niveau d'énergie quotidien**: ${formData.get('energie')}\n`;
+        markdown += `- **Contraintes particulières**: ${formData.get('contraintes')}\n`;
+
+        // Section 5: Alimentation & habitudes nutritionnelles
+        markdown += `\n### 5. Alimentation & habitudes nutritionnelles\n`;
+        markdown += `- **Comment décririez-vous votre alimentation ?** ${formData.get('alimentation')}\n`;
+        markdown += `- **Objectifs liés à l’alimentation**: ${getCheckboxValues(formData.getAll('objectifsAlimentation'))}\n`;
+        markdown += `- **Suivi d’un régime spécifique**: ${getCheckboxValues(formData.getAll('regime'))}\n`;
+
+        // Section 6: Engagement & suivi
+        markdown += `\n### 6. Engagement & suivi\n`;
+        markdown += `- **Accompagnement personnalisé**: ${formData.get('accompagnement')}\n`;
+        markdown += `- **Mode de contact préféré**: ${formData.get('contact')}\n`;
+
+        // Section 7: Derniers mots
+        markdown += `\n### 7. Un dernier mot ?\n`;
+        markdown += `- **Commentaire**: ${formData.get('dernierMot')}\n`;
+
+        // Mise à jour du contenu du Markdown
+        markdownOutput.textContent = markdown;
+      }
+
+      // Fonction pour récupérer les valeurs des cases à cocher
+      function getCheckboxValues(values) {
+        return values.join(', ') || 'Aucun';
+      }
+
+      // Fonction pour copier le Markdown dans le presse-papiers
+      function copyToClipboard() {
+        navigator.clipboard.writeText(markdownOutput.textContent).then(() => {
+          alert("Markdown copié dans le presse-papiers");
+        });
+      }
+
+      // Fonction pour télécharger le Markdown en fichier .md
+      function downloadMarkdown() {
+        const blob = new Blob([markdownOutput.textContent], { type: 'text/markdown' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'fiche_client.md';
+        link.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+
