@@ -133,9 +133,9 @@
         <input type="text" id="motivationsAutre" name="motivationsAutre" placeholder="Précisez si 'Autre'">
       </section>
 
-      <!-- Section 4: Niveau d’énergie & contraintes -->
+      <!-- Section 4: Niveau d'énergie & contraintes -->
       <section>
-        <label>Comment évaluez-vous votre niveau d’énergie au quotidien ?</label>
+        <label>Comment évaluez-vous votre niveau d'énergie au quotidien ?</label>
         <label><input type="radio" name="energie" value="Faible"> Faible</label>
         <label><input type="radio" name="energie" value="Moyen"> Moyen</label>
         <label><input type="radio" name="energie" value="Élevé"> Élevé</label>
@@ -151,10 +151,10 @@
         <label><input type="radio" name="alimentation" value="Plutôt saine"> Plutôt saine, mais avec quelques écarts</label>
         <label><input type="radio" name="alimentation" value="Irrégulière"> Irrégulière ou déséquilibrée</label>
 
-        <label>Avez-vous des objectifs liés à l’alimentation ?</label>
+        <label>Avez-vous des objectifs liés à l'alimentation ?</label>
         <label><input type="checkbox" name="objectifsAlimentation" value="Perte de poids"> Perte de poids</label>
         <label><input type="checkbox" name="objectifsAlimentation" value="Prise de masse"> Prise de masse</label>
-        <label><input type="checkbox" name="objectifsAlimentation" value="Plus d'énergie"> Plus d’énergie au quotidien</label>
+        <label><input type="checkbox" name="objectifsAlimentation" value="Plus d'énergie"> Plus d'énergie au quotidien</label>
         <label><input type="checkbox" name="objectifsAlimentation" value="Améliorer mes habitudes"> Améliorer mes habitudes alimentaires</label>
         <input type="text" id="objectifsAlimentationAutre" name="objectifsAlimentationAutre" placeholder="Précisez si 'Autre'">
 
@@ -170,7 +170,7 @@
         <label>Êtes-vous intéressé(e) par un accompagnement personnalisé ?</label>
         <label><input type="radio" name="accompagnement" value="Oui"> Oui, je veux en savoir plus</label>
         <label><input type="radio" name="accompagnement" value="Peut-être"> Peut-être</label>
-        <label><input type="radio" name="accompagnement" value="Pas pour l'instant"> Pas pour l’instant</label>
+        <label><input type="radio" name="accompagnement" value="Pas pour l'instant"> Pas pour l'instant</label>
 
         <label>Préférez-vous être contacté(e) par :</label>
         <label><input type="radio" name="contact" value="Email"> Email</label>
@@ -184,10 +184,9 @@
         <label>Un dernier mot ?</label>
         <textarea id="dernierMot" name="dernierMot" placeholder="Avez-vous une question, une attente particulière ou un élément à partager ?"></textarea>
       </section>
-
-      <!-- Button to generate markdown -->
-      <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
     </form>
+
+    <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
 
     <div class="output-section">
       <h2>Markdown généré</h2>
@@ -202,88 +201,87 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("formClient");
-      const markdownOutput = document.getElementById("markdownOutput");
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("formClient");
+    const markdownOutput = document.getElementById("markdownOutput");
 
-      // Met à jour le Markdown à chaque saisie
-      form.addEventListener("input", updateMarkdown);
-      form.addEventListener("change", updateMarkdown);
+    // Fonction utilitaire pour récupérer les valeurs des checkbox sélectionnées
+    function getCheckedValues(formData, name) {
+      const values = [];
+      document.querySelectorAll(`input[name="${name}"]:checked`).forEach(input => values.push(input.value));
+      return values.length > 0 ? values.join(", ") : "Aucune sélection";
+    }
 
-      function updateMarkdown() {
-        const formData = new FormData(form);
-        let markdown = '';
+    // Met à jour le Markdown à chaque saisie
+    function updateMarkdown() {
+      const formData = new FormData(form);
+      let markdown = '';
 
-        // Section 1: Informations personnelles
-        markdown += `### 1. Informations personnelles\n`;
-       
+      // Section 1: Informations personnelles
+      markdown += `### 1. Informations personnelles\n`;
+      markdown += `- **Nom**: ${formData.get('nom') || "Non renseigné"}\n`;
+      markdown += `- **Prénom**: ${formData.get('prenom') || "Non renseigné"}\n`;
+      markdown += `- **Âge**: ${formData.get('age') || "Non renseigné"}\n`;
+      markdown += `- **Profession**: ${formData.get('profession') || "Non renseigné"}\n`;
+      markdown += `- **Coordonnées**: ${formData.get('coordonnees') || "Non renseigné"}\n`;
 
- markdown += `- **Nom**: ${formData.get('nom')}\n`;
-        markdown += `- **Prénom**: ${formData.get('prenom')}\n`;
-        markdown += `- **Âge**: ${formData.get('age')}\n`;
-        markdown += `- **Profession**: ${formData.get('profession')}\n`;
-        markdown += `- **Coordonnées (email/téléphone)**: ${formData.get('coordonnees')}\n`;
+      // Section 2: Expérience sportive
+      markdown += `\n### 2. Expérience sportive\n`;
+      markdown += `- **Avez-vous déjà suivi un programme d'entraînement ?** ${formData.get('experienceCoaching') || "Non renseigné"}\n`;
+      markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport') || "Non renseigné"}\n`;
+      markdown += `- **Types d'activités physiques**: ${getCheckedValues(formData, 'typeActivites')}\n`;
 
-        // Section 2: Expérience sportive
-        markdown += `\n### 2. Expérience & habitudes sportives\n`;
-        markdown += `- **Avez-vous déjà suivi un programme d’entraînement ou un coaching ?** ${formData.get('experienceCoaching') === 'oui' ? 'Oui' : 'Non'}\n`;
-        markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport')}\n`;
-        markdown += `- **Types d'activités physiques**: ${getCheckboxValues(formData.getAll('typeActivites'))}\n`;
+      // Section 3: Objectifs & motivations
+      markdown += `\n### 3. Objectifs & motivations\n`;
+      markdown += `- **Pourquoi s'entraîner ?** ${getCheckedValues(formData, 'objectifs')}\n`;
+      markdown += `- **Motivations principales**: ${getCheckedValues(formData, 'motivations')}\n`;
 
-        // Section 3: Objectifs & motivations
-        markdown += `\n### 3. Objectifs & motivations\n`;
-        markdown += `- **Pourquoi souhaitez-vous vous entraîner ?** ${getCheckboxValues(formData.getAll('objectifs'))}\n`;
-        markdown += `- **Qu’est-ce qui vous motive le plus à atteindre vos objectifs ?** ${getCheckboxValues(formData.getAll('motivations'))}\n`;
+      // Section 4: Niveau d'énergie & contraintes
+      markdown += `\n### 4. Niveau d'énergie & contraintes\n`;
+      markdown += `- **Niveau d'énergie**: ${formData.get('energie') || "Non renseigné"}\n`;
+      markdown += `- **Contraintes**: ${formData.get('contraintes') || "Non renseigné"}\n`;
 
-        // Section 4: Niveau d’énergie & contraintes
-        markdown += `\n### 4. Niveau d’énergie & contraintes\n`;
-        markdown += `- **Niveau d'énergie quotidien**: ${formData.get('energie')}\n`;
-        markdown += `- **Contraintes particulières**: ${formData.get('contraintes')}\n`;
+      // Section 5: Alimentation
+      markdown += `\n### 5. Alimentation\n`;
+      markdown += `- **Type d'alimentation**: ${formData.get('alimentation') || "Non renseigné"}\n`;
+      markdown += `- **Objectifs alimentaires**: ${getCheckedValues(formData, 'objectifsAlimentation')}\n`;
+      markdown += `- **Régime spécifique**: ${getCheckedValues(formData, 'regime')}\n`;
 
-        // Section 5: Alimentation & habitudes nutritionnelles
-        markdown += `\n### 5. Alimentation & habitudes nutritionnelles\n`;
-        markdown += `- **Comment décririez-vous votre alimentation ?** ${formData.get('alimentation')}\n`;
-        markdown += `- **Objectifs liés à l’alimentation**: ${getCheckboxValues(formData.getAll('objectifsAlimentation'))}\n`;
-        markdown += `- **Suivi d’un régime spécifique**: ${getCheckboxValues(formData.getAll('regime'))}\n`;
+      // Section 6: Engagement
+      markdown += `\n### 6. Engagement & suivi\n`;
+      markdown += `- **Accompagnement personnalisé ?** ${formData.get('accompagnement') || "Non renseigné"}\n`;
+      markdown += `- **Mode de contact préféré**: ${formData.get('contact') || "Non renseigné"}\n`;
 
-        // Section 6: Engagement & suivi
-        markdown += `\n### 6. Engagement & suivi\n`;
-        markdown += `- **Accompagnement personnalisé**: ${formData.get('accompagnement')}\n`;
-        markdown += `- **Mode de contact préféré**: ${formData.get('contact')}\n`;
+      // Section 7: Dernier mot
+      markdown += `\n### 7. Un dernier mot ?\n`;
+      markdown += `${formData.get('dernierMot') || "Non renseigné"}\n`;
 
-        // Section 7: Derniers mots
-        markdown += `\n### 7. Un dernier mot ?\n`;
-        markdown += `- **Commentaire**: ${formData.get('dernierMot')}\n`;
+      // Mise à jour du Markdown dans la page
+      markdownOutput.textContent = markdown;
+    }
 
-        // Mise à jour du contenu du Markdown
-        markdownOutput.textContent = markdown;
-      }
+    // Définition des fonctions pour les boutons
+    window.generateMarkdown = updateMarkdown;
 
-      // Fonction pour récupérer les valeurs des cases à cocher
-      function getCheckboxValues(values) {
-        return values.join(', ') || 'Aucun';
-      }
+    window.copyToClipboard = function () {
+      navigator.clipboard.writeText(markdownOutput.textContent).then(() => {
+        alert("Markdown copié !");
+      });
+    };
 
-      // Fonction pour copier le Markdown dans le presse-papiers
-      function copyToClipboard() {
-        navigator.clipboard.writeText(markdownOutput.textContent).then(() => {
-          alert("Markdown copié dans le presse-papiers");
-        });
-      }
+    window.downloadMarkdown = function () {
+      const blob = new Blob([markdownOutput.textContent], { type: 'text/markdown' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'fiche_client.md';
+      link.click();
+    };
 
-      // Fonction pour télécharger le Markdown en fichier .md
-      function downloadMarkdown() {
-        const blob = new Blob([markdownOutput.textContent], { type: 'text/markdown' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'fiche_client.md';
-        link.click();
-      }
-    });
-  </script>
-
-</body>
-</html>
+    // Mise à jour en temps réel
+    form.addEventListener("input", updateMarkdown);
+    form.addEventListener("change", updateMarkdown);
+  });
+</script>
 
 
 
