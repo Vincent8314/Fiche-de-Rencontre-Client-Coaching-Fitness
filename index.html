@@ -114,21 +114,25 @@
     }
     
     .button {
-      background-color: #4338ca;
+      background-color: #2563eb;
       color: white;
     }
-    
+
     .button:hover {
-      background-color: #3730a3;
-      transform: translateY(-1px);
+      background-color: #1d4ed8;
+      transform: scale(1.03);
     }
-    
+
+    .button:active {
+      transform: scale(0.97);
+    }
+        
     .button-copy {
-      background-color: #2563eb;
+      background-color: #4338ca;
     }
     
     .button-copy:hover {
-      background-color: #1d4ed8;
+      background-color: #3730a3;
     }
     
     .button-download {
@@ -337,7 +341,7 @@
       <!-- Section 7: Un dernier mot ? -->
       <section>
         <label>Avez-vous une question, une attente particulière ou un élément à partager ?</label>
-        <textarea id="dernierMot" name="dernierMot" placeholder="">votre partage</textarea>
+        <textarea id="dernierMot" name="dernierMot" placeholder="votre partage"></textarea>
       </section>
     </form>
 
