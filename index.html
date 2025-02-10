@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <title>Fiche de Rencontre Client – Coaching & Fitness</title>
   <style>
     /* Styles de base */
-    
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
       font-weight: 200; /* ou 100 pour encore plus fin */
@@ -18,13 +24,10 @@
     }
     
     .container {
-      background-color: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
       max-width: 1000px;
+      width: 90%;
       margin: 20px auto;
-      width: 90%; /* Ajout pour la responsivité */
+      overflow: hidden; /* Empêche le dépassement horizontal */
     }
     
     h1 {
@@ -338,102 +341,116 @@
     <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
 
     <div class="output-section">
-      <h2>Markdown généré</h2>
-      <pre id="markdownOutput"></pre>
+      <div class="output-section">
+        <h2>Markdown généré</h2>
+        <pre id="markdownOutput"></pre>
     </div>
-
-    <!-- Button to copy markdown to clipboard -->
+    
+    <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
     <button type="button" class="button button-copy" onclick="copyToClipboard()">Copier le Markdown</button>
+    <button type="button" class="button" style="background-color: #550596;" onclick="sendEmail()">Envoyer par Email</button>
+    <button type="button" class="button button-download" onclick="downloadMarkdown()">Télécharger le fichier</button>
 
-    <!-- Button to download markdown as .md file -->
-    <button type="button" class="button button-download" onclick="downloadMarkdown()">Télécharger le fichier Markdown</button>
   </div>
 
+
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formClient");
     const markdownOutput = document.getElementById("markdownOutput");
+    
+    emailjs.init("VrkvA3mXUAPMiNgZi");
 
-    // Fonction utilitaire pour récupérer les valeurs des checkbox sélectionnées
     function getCheckedValues(formData, name, autreField) {
-      const values = [];
-      document.querySelectorAll(`input[name="${name}"]:checked`).forEach(input => values.push(input.value));
-      const autreValue = formData.get(autreField);
-      if (autreValue) {
-        values.push(`Autre: ${autreValue}`);
-      }
-      return values.length > 0 ? values.join(", ") : "Aucune sélection";
+        const values = [];
+        document.querySelectorAll(`input[name="${name}"]:checked`).forEach(input => values.push(input.value));
+        const autreValue = formData.get(autreField);
+        if (autreValue) values.push(`Autre: ${autreValue}`);
+        return values.length > 0 ? values.join(", ") : "Aucune sélection";
     }
 
-    // Met à jour le Markdown à chaque saisie
     function updateMarkdown() {
-      const formData = new FormData(form);
-      let markdown = '';
+        const formData = new FormData(form);
+        let markdown = '';
+        
+        // Section 1
+        markdown += `### 1. Informations personnelles\n`;
+        markdown += `- **Nom**: ${formData.get('nom') || "Non renseigné"}\n`;
+        markdown += `- **Prénom**: ${formData.get('prenom') || "Non renseigné"}\n`;
+        markdown += `- **Âge**: ${formData.get('age') || "Non renseigné"}\n`;
+        markdown += `- **Profession**: ${formData.get('profession') || "Non renseigné"}\n`;
+        markdown += `- **Coordonnées**: ${formData.get('coordonnees') || "Non renseigné"}\n`;
 
-      // Section 1: Informations personnelles
-      markdown += `### 1. Informations personnelles\n`;
-      markdown += `- **Nom**: ${formData.get('nom') || "Non renseigné"}\n`;
-      markdown += `- **Prénom**: ${formData.get('prenom') || "Non renseigné"}\n`;
-      markdown += `- **Âge**: ${formData.get('age') || "Non renseigné"}\n`;
-      markdown += `- **Profession**: ${formData.get('profession') || "Non renseigné"}\n`;
-      markdown += `- **Coordonnées**: ${formData.get('coordonnees') || "Non renseigné"}\n`;
+        // Section 2
+        markdown += `\n### 2. Expérience sportive\n`;
+        markdown += `- **Avez-vous déjà suivi un programme d'entraînement ?** ${formData.get('experienceCoaching') || "Non renseigné"}\n`;
+        markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport') || "Non renseigné"}\n`;
+        markdown += `- **Types d'activités physiques**: ${getCheckedValues(formData, 'typeActivites', 'typeActivitesAutre')}\n`;
 
-      // Section 2: Expérience sportive
-      markdown += `\n### 2. Expérience sportive\n`;
-      markdown += `- **Avez-vous déjà suivi un programme d'entraînement ?** ${formData.get('experienceCoaching') || "Non renseigné"}\n`;
-      markdown += `- **Fréquence de sport actuelle**: ${formData.get('frequenceSport') || "Non renseigné"}\n`;
-      markdown += `- **Types d'activités physiques**: ${getCheckedValues(formData, 'typeActivites', 'typeActivitesAutre')}\n`;
+        // Section 3
+        markdown += `\n### 3. Objectifs & motivations\n`;
+        markdown += `- **Pourquoi s'entraîner ?** ${getCheckedValues(formData, 'objectifs', 'objectifsAutre')}\n`;
+        markdown += `- **Motivations principales**: ${getCheckedValues(formData, 'motivations', 'motivationsAutre')}\n`;
 
-      // Section 3: Objectifs & motivations
-      markdown += `\n### 3. Objectifs & motivations\n`;
-      markdown += `- **Pourquoi s'entraîner ?** ${getCheckedValues(formData, 'objectifs', 'objectifsAutre')}\n`;
-      markdown += `- **Motivations principales**: ${getCheckedValues(formData, 'motivations', 'motivationsAutre')}\n`;
+        // Section 4
+        markdown += `\n### 4. Niveau d'énergie & contraintes\n`;
+        markdown += `- **Niveau d'énergie**: ${formData.get('energie') || "Non renseigné"}\n`;
+        markdown += `- **Contraintes**: ${formData.get('contraintes') || "Non renseigné"}\n`;
 
-      // Section 4: Niveau d'énergie & contraintes
-      markdown += `\n### 4. Niveau d'énergie & contraintes\n`;
-      markdown += `- **Niveau d'énergie**: ${formData.get('energie') || "Non renseigné"}\n`;
-      markdown += `- **Contraintes**: ${formData.get('contraintes') || "Non renseigné"}\n`;
+        // Section 5
+        markdown += `\n### 5. Alimentation\n`;
+        markdown += `- **Type d'alimentation**: ${formData.get('alimentation') || "Non renseigné"}\n`;
+        markdown += `- **Objectifs alimentaires**: ${getCheckedValues(formData, 'objectifsAlimentation', 'objectifsAlimentationAutre')}\n`;
+        markdown += `- **Régime spécifique**: ${getCheckedValues(formData, 'regime', 'regimeAutre')}\n`;
 
-      // Section 5: Alimentation
-      markdown += `\n### 5. Alimentation\n`;
-      markdown += `- **Type d'alimentation**: ${formData.get('alimentation') || "Non renseigné"}\n`;
-      markdown += `- **Objectifs alimentaires**: ${getCheckedValues(formData, 'objectifsAlimentation', 'objectifsAlimentationAutre')}\n`;
-      markdown += `- **Régime spécifique**: ${getCheckedValues(formData, 'regime', 'regimeAutre')}\n`;
+        // Section 6
+        markdown += `\n### 6. Engagement & suivi\n`;
+        markdown += `- **Accompagnement personnalisé ?** ${formData.get('accompagnement') || "Non renseigné"}\n`;
+        let contact = formData.get('contact') || "Non renseigné";
+        const autreContact = formData.get('autremoyendecontact');
+        if (autreContact) contact += `, Autre moyen de contact: ${autreContact}`;
+        markdown += `- **Mode de contact préféré**: ${contact}\n`;
 
-       markdown += `\n### 6. Engagement & suivi\n`;
-      markdown += `- **Accompagnement personnalisé ?** ${formData.get('accompagnement') || "Non renseigné"}\n`;
-      let contact = formData.get('contact') || "Non renseigné";
-      const autreContact = formData.get('autremoyendecontact');
-      if (autreContact) {
-        contact += `, Autre moyen de contact: ${autreContact}`;
-      }
-      markdown += `- **Mode de contact préféré**: ${contact}\n`;
-      // Section 7: Dernier mot
-      markdown += `\n### 7. Un dernier mot ?\n`;
-      markdown += `${formData.get('dernierMot') || "Non renseigné"}\n`;
+        // Section 7
+        markdown += `\n### 7. Un dernier mot ?\n`;
+        markdown += `${formData.get('dernierMot') || "Non renseigné"}\n`;
 
-      // Mise à jour du Markdown dans la page
-      markdownOutput.textContent = markdown;
+        markdownOutput.textContent = markdown;
+        return markdown;
     }
 
-    // Définition des fonctions pour les boutons
     window.generateMarkdown = updateMarkdown;
 
-    window.copyToClipboard = function () {
-      navigator.clipboard.writeText(markdownOutput.textContent).then(() => {
-        alert("Markdown copié !");
-      });
+    window.sendEmail = function() {
+    const markdown = updateMarkdown();
+    const nom = form.querySelector('[name="nom"]').value;
+    
+    // Normalise les retours à la ligne pour l'email
+    const formattedMarkdown = markdown.replace(/\n/g, '\r\n');
+    
+    emailjs.send("service_3m5gwpg", "template_lvw3qt4", {
+    from_name: nom,
+    date: new Date().toLocaleDateString('fr-FR'),
+    markdown: 'markdown\n' + markdown  // On ajoute "markdown" avant le contenu
+})
+    .then(() => alert('Fiche client envoyée !'))
+    .catch(err => alert('Erreur: ' + err));
+};
+
+    window.copyToClipboard = function() {
+        navigator.clipboard.writeText(markdownOutput.textContent)
+            .then(() => alert("Markdown copié !"));
     };
 
-    window.downloadMarkdown = function () {
-      const blob = new Blob([markdownOutput.textContent], { type: 'text/markdown' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'fiche_client.md';
-      link.click();
+    window.downloadMarkdown = function() {
+        const blob = new Blob([markdownOutput.textContent], { type: 'text/markdown' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'fiche_client.md';
+        link.click();
     };
 
-    // Mise à jour en temps réel
     form.addEventListener("input", updateMarkdown);
     form.addEventListener("change", updateMarkdown);
   });
