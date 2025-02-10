@@ -24,7 +24,7 @@
     }
     
     .container {
-      max-width: 650px;
+      max-width: 800px;
       width: 90%;
       margin: 0 auto; /* Centre horizontalement l'élément */
       padding: 10px; /* Ajoute un espace intérieur pour le confort visuel */
@@ -41,7 +41,7 @@
       border-bottom: 0px solid #635bbb;
       padding-bottom: 10px;
     }
-    
+
     /* Style des sections */
     section {
       background: #deefff;
@@ -149,12 +149,14 @@
       background: #f8fafc;
       border-radius: 12px;
       padding: 20px;
+      text-align: center;
     }
     
     .output-section h2 {
       color: #1a202c;
       margin-bottom: 30px;
-      margin-top: -25px;
+      margin-top: -60px;
+      text-align: center;
     }
     
     .output-section pre {
@@ -168,7 +170,7 @@
     }
     
     /* Media Queries pour la responsivité */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 860px) {
       body {
         padding: 10px;
       }
@@ -345,11 +347,14 @@
       </section>
     </form>
 
-    <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
+    <div style="text-align: center;">
+      <button type="button" class="button" onclick="generateMarkdown()">Générer le Markdown</button>
+    </div>
 
     <div class="output-section">
+    <div class="output-section">
       <div class="output-section">
-        <h2>Markdown généré</h2>
+        <h2 style="color: #0C5CC4;  ">Markdown généré</h2>
         <pre id="markdownOutput"></pre>
       </div>
 
@@ -462,6 +467,9 @@
   });
 </script>
 </html>
+
+
+
 
 
 
