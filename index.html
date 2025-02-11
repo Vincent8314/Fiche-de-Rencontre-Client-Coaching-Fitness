@@ -8,226 +8,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <title>Fiche de Rencontre Client – Coaching & Fitness</title>
   <style>
-    /* Styles de base */
-    html, body {
-      max-width: 100%;
-      overflow-x: hidden;
-    }
+  /* Styles de base */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 200; /* ou 100 pour encore plus fin */
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-      min-height: 100vh;
-    }
-    
-    .container {
-      max-width: 50rem !important;
-      width: 90% !important;
-      margin: 0 auto; /* Centre horizontalement l'élément */
-      padding: 10px; /* Ajoute un espace intérieur pour le confort visuel */
-      box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-      overflow: hidden; /* Empêche le dépassement horizontal */
-    }
-    
-    h1 {
-      color: #0c5cc4;
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 2.2em;
-      font-weight: 700;
-      border-bottom: 0px solid #635bbb;
-      padding-bottom: 10px;
-    }
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200; /* ou 100 pour encore plus fin */
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  min-height: 100vh;
+}
 
-    /* Style des sections */
-    section {
-      background: #deefff;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      border: 1px solid #318aff;
-    }
+.container {
+  max-width: 50rem;
+  width: 90%;
+  margin: 0 auto; /* Centre horizontalement l'élément */
+  padding: 10px; /* Ajoute un espace intérieur pour le confort visuel */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  overflow: hidden; /* Empêche le dépassement horizontal */
+}
 
-    
-    /* Style des labels */
-    label {
-      display: block;
-      margin-bottom: 10px;
-      color: #2d3748;
-      font-weight: 500;
-    }
-    
-    /* Style des champs de saisie */
-    input[type="text"], 
-    input[type="number"], 
-    textarea {
-      width: calc(100% - 40px); /* Ajustement pour garder une marge de chaque côté */
-      padding: 12px;
-      margin: 8px 20px 20px; /* Marge de 20px à gauche et à droite */
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-sizing: border-box; /* Pour inclure padding et border dans la largeur */
-    }
-    
-    input[type="text"]:focus, 
-    input[type="number"]:focus, 
-    textarea:focus {
-      border-color: #4338ca;
-      box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
-      outline: none;
-    }
-    
-    /* Style des checkboxes et radios */
-    .checkbox-group {
-      margin: 15px 20px; /* Ajout de marges latérales */
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      margin: 5px 0;
-      min-width: 150px; /* Largeur minimum pour éviter des éléments trop serrés */
-    }
-    
-    input[type="radio"],
-    input[type="checkbox"] {
-      margin-right: 8px;
-    }
-    
-    /* Style des boutons */
-    .button {
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin: 10px 5px;
-    }
-    
-    .button {
-      background-color: #2563eb;
-      color: white;
-    }
+h1 {
+  color: #0c5cc4;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.2em;
+  font-weight: 700;
+  border-bottom: 0px solid #635bbb;
+  padding-bottom: 10px;
+}
 
-    .button:hover {
-      background-color: #1d4ed8;
-      transform: scale(1.03);
-    }
+/* Style des sections */
+section {
+  background: #deefff;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #318aff;
+}
 
-    .button:active {
-      transform: scale(0.97);
-    }
-        
-    .button-copy {
-      background-color: #4338ca;
-    }
-    
-    .button-copy:hover {
-      background-color: #3730a3;
-    }
-    
-    .button-download {
-      background-color: #dc2626;
-    }
-    
-    .button-download:hover {
-      background-color: #b91c1c;
-    }
-    
-    /* Style de la section de sortie */
-    .output-section {
-      margin-top: 20px;
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    .output-section h2 {
-      color: #1a202c;
-      margin-bottom: 30px;
-      margin-top: -60px;
-      text-align: center;
-    }
-    
-    .output-section pre {
-      background-color: #ffffff;
-      padding: 5px;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
-      font-family: monospace;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      margin: 0 auto;
-      width: 95%;
-      max-height: 20vh;
-      overflow-y: auto;
-    }
-    /* Media Queries pour la responsivité */
-    @media screen and (max-width: 900px) {
-      body {
-        padding: 10px;
-      }
-    
-      .container {
-        padding: 0px;
-        width: 95%;
-      }
-    
-      h1 {
-        font-size: 1.8em;
-      }
-    
-      section {
-        padding: 15px;
-      }
-    
-      input[type="text"], 
-      input[type="number"], 
-      textarea {
-        width: calc(100% - 20px);
-        margin: 8px 10px 20px;
-      }
-    
-      .checkbox-group {
-        margin: 15px 10px;
-      }
-    
-      .checkbox-group label {
-        min-width: 120px;
-      }
-    
-      .button {
-        width: 100%;
-        margin: 10px 0;
-      }
-    }
-    
-    @media screen and (max-width: 480px) {
-      h1 {
-        font-size: 1.5em;
-      }
-    
-      .checkbox-group label {
-        min-width: 100%;
-      }
-    
-      input[type="text"], 
-      input[type="number"], 
-      textarea {
-        font-size: 14px;
-      }
-    }
+/* Style des labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+/* Style des champs de saisie */
+input[type="text"], 
+input[type="number"], 
+textarea {
+  width: calc(100% - 40px); /* Ajustement pour garder une marge de chaque côté */
+  padding: 12px;
+  margin: 8px 20px 20px; /* Marge de 20px à gauche et à droite */
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Pour inclure padding et border dans la largeur */
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+textarea:focus {
+  border-color: #4338ca;
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+  outline: none;
+}
+
+/* Style des checkboxes et radios */
+.checkbox-group {
+  margin: 15px 20px; /* Ajout de marges latérales */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  min-width: 150px; /* Largeur minimum pour éviter des éléments trop serrés */
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Style des boutons */
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 5px;
+  background-color: #2563eb;
+  color: white;
+  position: relative;
+  top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background-color: #1d4ed8;
+  top: -4px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  background-color: #1541b3;
+  top: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button-copy {
+  background-color: #4338ca;
+}
+
+.button-copy:hover {
+  background-color: #3730a3;
+}
+
+.button-copy:active {
+  background-color: #312e81;
+}
+
+.button-download {
+  background-color: #dc2626;
+}
+
+.button-download:hover {
+  background-color: #b91c1c;
+}
+
+.button-download:active {
+  background-color: #991b1b;
+}
+
+/* Style de la section de sortie */
+.output-section {
+  margin-top: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.output-section h2 {
+  color: #1a202c;
+  margin-bottom: 30px;
+  margin-top: -60px;
+  text-align: center;
+}
+
+.output-section pre {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0 auto;
+  width: 95%;
+  max-height: 20vh;
+  overflow-y: auto;
+}
+
+/* Media Queries pour la responsivité */
+@media screen and (max-width: 900px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 0px;
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  section {
+    padding: 15px;
+  }
+
+  input[type="text"], 
+  input[type="number"], 
+  textarea {
+    width: calc(100% - 20px);
+    margin: 8px 10px 20px;
+  }
+
+  .checkbox-group {
+    margin: 15px 10px;
+  }
+
+  .checkbox-group label {
+    min-width: 120px;
+  }
+
+  .button {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .checkbox-group label {
+    min-width: 100%;
+  }
+
+  input[type="text"], 
+  input[type="number"], 
+  textarea {
+    font-size: 14px;
+  }
+}
     </style>
   </head>
 <body>
@@ -471,6 +482,8 @@
   });
 </script>
 </html>
+
+
 
 
 
