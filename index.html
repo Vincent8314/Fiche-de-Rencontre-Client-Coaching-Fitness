@@ -262,8 +262,11 @@ input[type="checkbox"] {
         <label for="profession">Profession:</label>
         <input type="text" id="profession" name="profession">
 
-        <label for="coordonnees">Coordonnées (email/téléphone):</label>
-        <input type="text" id="coordonnees" name="coordonnees">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+
+        <label for="telephone">Téléphone:</label>
+        <input type="text" id="telephone" name="telephone">
       </section>
 
       <!-- Section 2: Expérience sportive -->
@@ -406,7 +409,8 @@ input[type="checkbox"] {
         markdown += `- **Prénom**: ${formData.get('prenom') || "Non renseigné"}\n`;
         markdown += `- **Âge**: ${formData.get('age') || "Non renseigné"}\n`;
         markdown += `- **Profession**: ${formData.get('profession') || "Non renseigné"}\n`;
-        markdown += `- **Coordonnées**: ${formData.get('coordonnees') || "Non renseigné"}\n`;
+        markdown += `- **Email**: ${formData.get('email') || "Non renseigné"}\n`;
+        markdown += `- **Téléphone**: ${formData.get('telephone') || "Non renseigné"}\n`;
 
         // Section 2
         markdown += `\n### 2. Expérience sportive\n`;
