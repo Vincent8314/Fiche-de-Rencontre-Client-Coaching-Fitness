@@ -316,9 +316,14 @@ input[type="checkbox"] {
         <label><input type="radio" name="energie" value="Faible"> Faible</label>
         <label><input type="radio" name="energie" value="Moyen"> Moyen</label>
         <label><input type="radio" name="energie" value="Élevé"> Élevé</label>
-
+      
+        <label>Avez-vous des problèmes de santé ?</label>
+        <label><input type="radio" name="problemeSante" value="Oui"> Oui</label>
+        <label><input type="radio" name="problemeSante" value="Non"> Non</label>
+        <textarea id="detailsSante" name="detailsSante" placeholder="Si oui, merci de préciser"></textarea>
+      
         <label>Avez-vous des contraintes particulières (blessures, emploi du temps chargé, autres) ?</label>
-        <textarea id="contraintes" name="contraintes"placeholder="Précisez" ></textarea>
+        <textarea id="contraintes" name="contraintes" placeholder="Précisez"></textarea>
       </section>
 
       <!-- Section 5: Alimentation & habitudes nutritionnelles -->
@@ -426,6 +431,10 @@ input[type="checkbox"] {
         // Section 4
         markdown += `\n### 4. Niveau d'énergie & contraintes\n`;
         markdown += `- **Niveau d'énergie**: ${formData.get('energie') || "Non renseigné"}\n`;
+        markdown += `- **Problèmes de santé**: ${formData.get('problemeSante') || "Non renseigné"}\n`;
+        if (formData.get('problemeSante') === 'Oui') {
+        markdown += `  - **Détails**: ${formData.get('detailsSante') || "Non précisé"}\n`;
+        }
         markdown += `- **Contraintes**: ${formData.get('contraintes') || "Non renseigné"}\n`;
 
         // Section 5
@@ -486,6 +495,7 @@ input[type="checkbox"] {
   });
 </script>
 </html>
+
 
 
 
